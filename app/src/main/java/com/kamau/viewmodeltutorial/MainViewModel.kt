@@ -1,4 +1,10 @@
 package com.kamau.viewmodeltutorial
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+
+class MainViewModel : ViewModel() {
+    var number = 0
+    fun  inCount(){
+        number++
+    }
 }

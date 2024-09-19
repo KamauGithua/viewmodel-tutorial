@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import com.kamau.viewmodeltutorial.ui.theme.ViewModelTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,9 +40,12 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                 ) {
+                    var viewModel = ViewModelProvider(this)[MainViewModel::class.java]
                     var count by remember {
                         mutableIntStateOf(0)
                     }
+                    count = viewModel.number
+
                     Column(
                         modifier = Modifier
                             .fillMaxSize(),
@@ -51,7 +55,9 @@ class MainActivity : ComponentActivity() {
                         Text(text = "Count: $count", fontSize = 36.sp)
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(onClick = {
-                            count ++
+                            viewModel.inCount()
+                            count = viewModel.number
+//                            number ++
                         }) {
                             Text(text = "Button", fontSize = 36.sp)
                         }
